@@ -1,4 +1,4 @@
-package my.will.be.done.squants.exchangerates
+package my.will.be.done.squants.fx
 
 import monix.eval.{Task, MVar}
 import scala.concurrent.Future

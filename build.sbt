@@ -2,13 +2,13 @@ crossScalaVersions := Seq("2.10.6", "2.11.11", "2.12.2")
 
 lazy val root = project
   .in(file("."))
-  .aggregate(squantsExchangeRatesJS, squantsExchangeRatesJVM)
+  .aggregate(squantsFxJs, squantsFxJvm)
 
-lazy val squantsExchangeRates = crossProject
+lazy val squantsFx = crossProject
   .in(file("."))
   .settings(
     scalacOptions ++= Seq("-deprecation", "-feature", "-Xlint"),
-    name := "squants-exchange-rates",
+    name := "squants-fx",
     version := "0.0.1",
     scalaVersion in ThisBuild := "2.12.2",
     organization := "my.will.be.done",
@@ -24,5 +24,5 @@ lazy val squantsExchangeRates = crossProject
     }
   )
 
-lazy val squantsExchangeRatesJVM = squantsExchangeRates.jvm
-lazy val squantsExchangeRatesJS  = squantsExchangeRates.js
+lazy val squantsFxJvm = squantsFx.jvm
+lazy val squantsFxJs  = squantsFx.js

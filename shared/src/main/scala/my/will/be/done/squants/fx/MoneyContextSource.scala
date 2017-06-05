@@ -1,4 +1,4 @@
-package my.will.be.done.squants.exchangerates
+package my.will.be.done.squants.fx
 
 import squants.market.{defaultMoneyContext, MoneyContext}
 import scala.concurrent.{ExecutionContext, Await}
