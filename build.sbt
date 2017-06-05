@@ -15,8 +15,7 @@ lazy val squantsFx = crossProject
     libraryDependencies ++= {
       val circeVersion = "0.8.0"
       Seq(
-        "io.monix"      %%% "monix"         % "2.3.0",
-        "fr.hmil"       %%% "roshttp"       % "2.0.1",
+        "fr.hmil"       %%% "roshttp"       % "2.0.2",
         "org.typelevel" %%% "squants"       % "1.3.0",
         "io.circe"      %%% "circe-generic" % circeVersion,
         "io.circe"      %%% "circe-parser"  % circeVersion
