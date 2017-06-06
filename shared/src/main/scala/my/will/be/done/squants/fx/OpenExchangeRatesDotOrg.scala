@@ -4,13 +4,13 @@ import io.circe.generic.auto._
 import io.circe.parser.decode
 import scala.util.Try
 
-trait OpenExchangeRatesDotOrg extends HttpSource {
+trait OpenExchangeRatesDotOrg extends UrlSource {
   val appId: String
-  override val sourceUrl =
+  override def sourceUrl: String =
     s"https://openexchangerates.org/api/latest.json?app_id=$appId"
   override def parseResponseBody(
       responseBody: String): Try[HttpSource.ResponseBody] = {
-    decode[FixerDotIo.ResponseBody](responseBody).toTry
+    decode[OpenExchangeRatesDotOrg.ResponseBody](responseBody).toTry
   }
 }
 

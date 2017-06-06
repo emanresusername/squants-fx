@@ -7,21 +7,21 @@ import squants.market.defaultCurrencyMap
 import scala.util.Try
 import scala.concurrent.Future
 
-trait HttpSource extends ExchangeRatesSource {
+trait HttpRequestSource extends ExchangeRatesSource {
   implicit val scheduler: Scheduler
-  val sourceUrl: String
+  def httpRequest: HttpRequest
 
   def parseResponseBody(responseBody: String): Try[HttpSource.ResponseBody]
 
   override def getExchangeRates: Future[ExchangeRates] = {
     (for {
-      response     ← Task.deferFuture { HttpRequest(sourceUrl).get }
+      response     ← Task.deferFuture { httpRequest.send }
       responseBody ← Task.fromTry(parseResponseBody(response.body))
       base         ← Task.eval { defaultCurrencyMap(responseBody.base) }
     } yield {
       responseBody.rates.flatMap {
         case (key, value) ⇒
-          defaultCurrencyMap.get(key).map { currency ⇒
+          defaultCurrencyMap.get(key).filterNot(base.equals).map { currency ⇒
             base / currency(value)
           }
       }.toList
